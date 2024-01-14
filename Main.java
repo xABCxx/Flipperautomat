@@ -8,18 +8,18 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("Please choose an action: ");
-            System.out.println("1: Insert Coin");
-            System.out.println("2: Press Start");
-            System.out.println("3: Cashback");
-            System.out.println("0: Exit");
-            System.out.print("Enter choice: ");
+            System.out.println("Bitte wählen Sie eine Aktion aus: ");
+            System.out.println("1: Münzen einwerfen");
+            System.out.println("2: Start");
+            System.out.println("3: Geld zurück");
+            System.out.println("0: Spiel beenden");
+            System.out.print("Auswahl: ");
 
             int choice = scanner.nextInt();
 
             switch (choice) {
                 case 1:
-                    System.out.print("Enter amount (0-3) to deposit: ");
+                    System.out.print("Betrag (0-3) einwerfen: ");
                     int amount = scanner.nextInt();
                     flipper.deposit(amount);
                     break;
@@ -30,11 +30,11 @@ public class Main {
                     flipper.cashback();
                     break;
                 case 0:
-                    System.out.println("Exiting...");
+                    System.out.println("Spiel wird beendet...");
                     scanner.close();
                     return;
                 default:
-                    System.out.println("Invalid choice.");
+                    System.out.println("Ungültige Auswahl.");
                     break;
             }
 
