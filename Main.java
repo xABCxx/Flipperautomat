@@ -1,40 +1,46 @@
 import java.sql.SQLOutput;
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
         Flipper flipper = new Flipper();
+        Scanner scanner = new Scanner(System.in);
 
-        // check of initial state (must be NoCreditState)
-        // check of initial credit (must be 0)
-        System.out.println(flipper.getState());
-        System.out.println(flipper.getState().getClass().getSimpleName());
+        while (true) {
+            System.out.println("Please choose an action: ");
+            System.out.println("1: Insert Coin");
+            System.out.println("2: Press Start");
+            System.out.println("3: Cashback");
+            System.out.println("0: Exit");
+            System.out.print("Enter choice: ");
 
-        System.out.println("\n");
+            int choice = scanner.nextInt();
 
-        // try to press the start button without credit
-        flipper.pressStart();
-        System.out.println(flipper.getState());
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter amount (0-3) to deposit: ");
+                    int amount = scanner.nextInt();
+                    flipper.deposit(amount);
+                    break;
+                case 2:
+                    flipper.pressStart();
+                    break;
+                case 3:
+                    flipper.cashback();
+                    break;
+                case 0:
+                    System.out.println("Exiting...");
+                    scanner.close();
+                    return;
+                default:
+                    System.out.println("Invalid choice.");
+                    break;
+            }
 
-        System.out.println("\n");
-
-        // increase credit by 2
-        // check of state (must switch to ReadyState)
-        flipper.deposit(2);
-        System.out.println(flipper.getState());
-
-        System.out.println("\n");
-
-        // press start button
-        // change to PlayingState
-        flipper.pressStart();
-        System.out.println(flipper.getState());
-
-        System.out.println("\n");
-
-        // press start button
-        // print names of programmers
-        flipper.pressStart();
-
-        System.out.println("\n");
+            System.out.println("Current State: " + flipper.getState().getClass().getSimpleName());
+            System.out.println("Current Balance: " + flipper.getState().getBalance());
+            System.out.println();
+        }
     }
 }
