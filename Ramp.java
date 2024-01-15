@@ -1,11 +1,15 @@
 public class Ramp implements FlipperElement {
-    // Ramp-specific methods
-    public void open() {
-        // Logic to open the ramp
+    public boolean isActive;
+    // Ramp-specific method
+
+    public void setActive(boolean isActive) {
+        this.isActive = isActive;
+
     }
 
     @Override
     public void hit() {
 
     }
+
 }

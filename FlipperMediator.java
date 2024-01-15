@@ -11,16 +11,16 @@ public class FlipperMediator implements Mediator {
 
     @Override
     public void notify(FlipperElement element, String event) {
-        if (event.equals("targetHit")) {
-            checkTargetsAndOperateRamp();
+        //Todo
+    }
+
+    @Override
+    public void activateRamp() {
+        if (ramp != null) {
+            ramp.setActive(true); // Assuming Ramp has a setActive method
+            // Perform any additional actions needed when the ramp is activated
+            // For example, you might want to increase points or change how the ball behaves
         }
     }
 
-    private void checkTargetsAndOperateRamp() {
-        boolean allTargetsHit = targets.stream().allMatch(Target::isHit);
-        if (allTargetsHit) {
-            ramp.open();
-            targets.forEach(Target::reset);
-        }
-    }
 }

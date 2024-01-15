@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Flipper {
     private AccountState state;
@@ -50,11 +51,40 @@ public class Flipper {
         }
     }
 
-    private void startGame() {
-        // Start the actual gameplay
-        // This could involve setting up a game loop, handling user inputs, etc.
-        // Notify mediator about game start if necessary
-    }
+    public void startGame() {
+        int totalScore = 0;
+        int balls = 3;
 
-    // Additional methods for game logic
+        while (balls > 0) {
+            int score = 0;
+            Random random = new Random();
+            int x = random.nextInt(10); // Slingshot hits
+            int y = random.nextInt(10); // Bumper hits
+            int z = random.nextInt(10); // Target hits
+            System.out.println("Anzahl der getroffenen Slingshots: " + x);
+            System.out.println("Anzahl der getroffenen Bumper: " + y);
+            System.out.println("Anzahl der getroffenen Zielpunkte: " + z);
+
+            score += x + y * 2 + z * 25; // Calculate score
+
+            // Ramp activation
+            if (x >= 9 && y >= 9) {
+                mediator.activateRamp(); // Activate ramp through mediator
+                score *= 2; // Double the score
+                System.out.println("Die Rampe wurde aktiviert, deine Punkte verdoppeln sich!");
+            }
+
+            // Check for Flipperbat hit or ball in hole
+            if (x > 6 || y > 6 || z > 6) {
+                System.out.println("Der Flipperhebel wurde getroffen, der Ball fliegt wieder hoch!");
+                continue; // Skip the rest of the loop iteration
+            }
+
+            System.out.println("Der Ball verschwindet in einem Loch. Runde beendet.");
+            balls--;
+            totalScore += score;
+            System.out.println("Diese Runde erreichte Punkte: " + score);
+        }
+        System.out.println("Game Over. Insgesamt erreichte Punkte: " + totalScore);
+    }
 }
